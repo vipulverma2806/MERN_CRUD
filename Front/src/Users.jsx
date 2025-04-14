@@ -5,10 +5,10 @@ import axios from "axios";
 const Users = () => {
   const [users, setUsers] = useState([]);
   //   const [id,setId] = useState();
-
+    axios.defaults.withCredentials = true;
   const deleteUser = (id) => {
     axios
-      .delete(`http://localhost:8000/delete/${id}`)
+      .delete(`http://localhost:4000/delete/${id}`)
       .then((result) => {
         console.log(result);
         location.reload();
@@ -20,7 +20,7 @@ const Users = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/get")
+      .get("http://localhost:4000/get")
       .then((result) => {
         setUsers(result.data);
       })

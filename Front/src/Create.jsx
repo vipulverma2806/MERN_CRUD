@@ -11,7 +11,7 @@ const Create = () => {
     
 
     axios
-    .post("http://localhost:8000/post",{
+    .post("http://localhost:4000/post",{
         name:name,
         email:email,
         age:age,})

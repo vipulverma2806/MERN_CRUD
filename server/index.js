@@ -2,8 +2,15 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const User = require("./model.js");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 const app = express();
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin:["http://localhost:5173"],
+  methods:["GET","POST","PUT","DELETE"],
+  credentials:true,
+}));
 app.use(express.json());
 mongoose
   .connect("mongodb://localhost:27017/CRUD")
@@ -67,6 +74,16 @@ app.delete("/delete/:id", (req, res) => {
 
 app.get("/get", (req, res) => {
   console.log(req.body);
+  const token = req.cookies.token;
+  if(token){
+    jwt.verify(token,"vipul-key",(err,decoded)=>{
+      console.log(decoded)
+      console.log(err)
+
+    })
+  }else{
+    return res.json("token not foundd")
+  }
   User.find()
     .then((result) => {
       console.log("success");
@@ -78,4 +95,4 @@ app.get("/get", (req, res) => {
     });
 });
 
-app.listen("8000");
+app.listen("4000");

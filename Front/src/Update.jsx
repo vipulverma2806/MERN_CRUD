@@ -14,7 +14,7 @@ const Update = () => {
   const [age, setAge] = useState();
 
   const updateData = () => {
-    axios.put(`http://localhost:8000/update/${id}`, {
+    axios.put(`http://localhost:4000/update/${id}`, {
         name:name,
         email:email,
         age:age,
